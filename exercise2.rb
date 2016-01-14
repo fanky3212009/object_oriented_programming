@@ -8,7 +8,7 @@ class Rover
   end
 
   def read_instruction(instruction)
-    instruction.each_char {|char| char == "M" ? move : turn(char)}
+    instruction == "M" ? move : turn(instruction)
   end
 
   def move
@@ -33,5 +33,15 @@ class Rover
       direction_index = (direction_index + 1) % 4
     end
     @direction = direction_array[direction_index]
+  end
+end
+
+class MissionControl
+  def read_instructions(instructions, rover)
+    instructions.each_char { |chr| rover.read_instruction(chr)}
+  end
+
+  def report(rover)
+    puts "#{rover.x_coordinate} #{rover.y_coordinate} #{rover.direction}"
   end
 end
