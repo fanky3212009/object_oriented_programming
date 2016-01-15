@@ -36,6 +36,7 @@ class Rover
   end
 end
 
+# Take it Further!
 class MissionControl
   def read_instructions(instructions, rover)
     instructions.each_char { |chr| rover.read_instruction(chr)}
@@ -44,4 +45,22 @@ class MissionControl
   def report(rover)
     puts "#{rover.x_coordinate} #{rover.y_coordinate} #{rover.direction}"
   end
+end
+
+class Plateau
+  def initialize(x_size, y_size)
+    @x_size = x_size
+    @y_size = y_size
+  end
+
+  def off?(rover)
+    rover.x_coordinate < 0 || rover.x_coordinate > x_size && \
+    rover.y_coordinate < 0 && rover.y_coordinate > y_size
+  end
+
+  def collision?(rover1, rover2)
+    rover1.x_coordinate == rover2.x_coordinate && \
+    rover1.y_coordinate == rover2.y_coordinate
+  end
+  
 end
